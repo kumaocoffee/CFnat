@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -73,7 +73,11 @@ namespace cfnat.win.gui
             try
             {
                 string currentPath = AppDomain.CurrentDomain.BaseDirectory;
-                string filePath = Path.Combine(currentPath, "colo", "ip.csv");
+                string filePath = Path.Combine(currentPath, "ip.csv");
+                if (!File.Exists(filePath))
+                {
+                    filePath = Path.Combine(currentPath, "colo", "ip.csv");
+                }
 
                 if (File.Exists(filePath))
                 {
@@ -146,7 +150,7 @@ namespace cfnat.win.gui
                 }
                 else
                 {
-                    MessageBox.Show("未找到文件: ip.csv", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("未找到本地 IP 缓存文件 (ip.csv)，请先点击主界面的【缓存IP库】进行优选测速。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
